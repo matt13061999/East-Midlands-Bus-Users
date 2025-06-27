@@ -1,56 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>East Midlands Bus News Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <title>UK Bus Tracking Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
   <style>
-    body { margin:0; font-family:'Inter',sans-serif; background:#f0f2f5; color:#333;}
-    header { background:#d40000; color:white; padding:20px; text-align:center; font-size:2em; font-weight:700; }
-    .container { max-width:1000px; margin:30px auto; padding:0 20px; }
-    .feed { background:white; border-radius:12px; margin-bottom:40px; box-shadow:0 4px 12px rgba(0,0,0,0.08); padding:20px; }
-    .feed h2 { color:#d40000; margin-top:0; font-size:1.3em; }
-    footer { text-align:center; padding:20px; color:#777; font-size:0.9em; }
+    body, html { margin: 0; padding: 0; height: 100%; }
+    #map { height: 100vh; width: 100vw; }
   </style>
 </head>
 <body>
 
-  <header>🚌 East Midlands Bus News Hub</header>
+<div id="map"></div>
 
-  <div class="container">
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    <div class="feed">
-      <h2>Trentbarton</h2>
-      <a class="twitter-timeline" data-height="400" href="https://twitter.com/trentbartonland?ref_src=twsrc%5Etfw">Tweets by trentbartonland</a>
-    </div>
+<script>
+  const map = L.map('map').setView([53.0, -1.5], 6); // centre on Midlands
 
-    <div class="feed">
-      <h2>Stagecoach East Midlands</h2>
-      <a class="twitter-timeline" data-height="400" href="https://twitter.com/StagecoachEMid?ref_src=twsrc%5Etfw">Tweets by StagecoachEMid</a>
-    </div>
-
-    <div class="feed">
-      <h2>Arriva Midlands</h2>
-      <a class="twitter-timeline" data-height="400" href="https://twitter.com/arrivamidlandse?ref_src=twsrc%5Etfw">Tweets by arrivamidlandse</a>
-    </div>
-
-    <div class="feed">
-      <h2>CT4N</h2>
-      <a class="twitter-timeline" data-height="400" href="https://twitter.com/CT4NLive?ref_src=twsrc%5Etfw">Tweets by CT4NLive</a>
-    </div>
-
-    <div class="feed">
-      <h2>NottsBus (Nottinghamshire County Council)</h2>
-      <p>No Twitter feed available — try the official page:</p>
-      <p><a href="https://www.nottinghamshire.gov.uk/transport/public-transport" target="_blank">Council Service Updates</a></p>
-    </div>
-
-  </div>
-
-  <footer>Made by Matthew | Live feeds from official bus operator Twitter accounts</footer>
-
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+</script>
 
 </body>
 </html>
