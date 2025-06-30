@@ -70,31 +70,33 @@
     <div id="flickr-feed" class="photo-grid">Loading photos...</div>
   </section>
 
-  <script>
-    async function loadFlickrFeed() {
-      const flickrURL = "https://www.flickr.com/services/feeds/photos_public.gne?id=53050716@N03&format=json&nojsoncallback=1";
+<script>
+  async function loadFlickrFeed() {
+    const proxy = "https://api.allorigins.win/get?url=";
+    const flickrURL = encodeURIComponent("https://www.flickr.com/services/feeds/photos_public.gne?id=53050716@N03&format=json");
 
-      try {
-        const res = await fetch(flickrURL);
-        const data = await res.json();
+    try {
+      const res = await fetch(proxy + flickrURL);
+      const textData = await res.json();
+      const data = JSON.parse(textData.contents);
 
-        const container = document.getElementById("flickr-feed");
-        container.innerHTML = "";
+      const container = document.getElementById("flickr-feed");
+      container.innerHTML = "";
 
-        data.items.slice(0, 12).forEach(item => {
-          const img = document.createElement("img");
-          img.src = item.media.m;
-          img.alt = item.title;
-          img.loading = "lazy";
-          container.appendChild(img);
-        });
-      } catch (err) {
-        document.getElementById("flickr-feed").innerHTML = '<p class="error">Could not load photos 😔</p>';
-        console.error("Failed to load Flickr feed:", err);
-      }
+      data.items.slice(0, 12).forEach(item => {
+        const img = document.createElement("img");
+        img.src = item.media.m;
+        img.alt = item.title;
+        img.loading = "lazy";
+        container.appendChild(img);
+      });
+    } catch (err) {
+      document.getElementById("flickr-feed").innerHTML = '<p class="error">Still can’t load photos 😔</p>';
+      console.error("Flickr feed error:", err);
     }
+  }
 
-    loadFlickrFeed();
-  </script>
+  loadFlickrFeed();
+</script>
 </body>
 </html>
