@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f8f9fa;
+      background: #f4f4f4;
       margin: 0;
       padding: 0;
     }
@@ -19,11 +19,11 @@
     }
 
     main {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 40px auto;
       padding: 20px;
       background: white;
-      border-radius: 10px;
+      border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
@@ -33,15 +33,16 @@
       margin-bottom: 20px;
     }
 
-    .flickr-container {
+    .flickr-embed {
       display: flex;
       justify-content: center;
-      align-items: center;
     }
 
-    .flickr-container a img {
+    .flickr-embed img {
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      max-width: 100%;
+      height: auto;
     }
   </style>
 </head>
@@ -49,14 +50,16 @@
 
   <header>
     <h1>East Midlands Bus Users</h1>
-    <p>News, Photos, and Travel Updates for the Region</p>
+    <p>Your source for bus updates, photos, and more</p>
   </header>
 
   <main>
-    <h2>📸 Featured Bus Photo</h2>
-    <div class="flickr-container">
-      <a data-flickr-embed="true" data-header="true" data-footer="true" data-context="true" href="https://www.flickr.com/photos/matthewroebuck/54621505809/in/dateposted-public/" title="Stagecoach Yorkshire X17 (73081) (Matlock Bath)">
-        <img src="https://live.staticflickr.com/65535/54621505809_9c1a3438cd_q.jpg" width="150" height="150" alt="Stagecoach Yorkshire X17 (73081) (Matlock Bath)"/>
+    <h2>📸 Full Photo Stream</h2>
+    <div class="flickr-embed">
+      <a data-flickr-embed="true" data-header="true" data-footer="true" data-context="true" 
+         href="https://www.flickr.com/photos/141186208@N08" title="">
+        <img src="https://live.staticflickr.com/65535/54621505809_a7a3845818_h.jpg" 
+             width="1600" height="1200" alt=""/>
       </a>
     </div>
   </main>
