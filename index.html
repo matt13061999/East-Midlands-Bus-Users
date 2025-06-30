@@ -43,4 +43,58 @@
     .photo-grid img {
       width: 100%;
       border-radius: 8px;
-      box-shadow: 0
+      box-shadow: 0 0 4px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .photo-grid img:hover {
+      transform: scale(1.03);
+    }
+
+    .error {
+      text-align: center;
+      color: red;
+      font-weight: bold;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>East Midlands Bus Users</h1>
+    <p>Latest Bus Photos by Matthew Roebuck</p>
+  </header>
+
+  <section id="flickr-section">
+    <h2>📸 Recent Bus Photos</h2>
+    <div id="flickr-feed" class="photo-grid">Loading photos...</div>
+  </section>
+
+  <script>
+    async function loadFlickrFeed() {
+      const flickrURL = "https://www.flickr.com/services/feeds/photos_public.gne?id=53050716@N03&format=json&nojsoncallback=1";
+
+      try {
+        const res = await fetch(flickrURL);
+        const data = await res.json();
+
+        const container = document.getElementById("flickr-feed");
+        container.innerHTML = "";
+
+        data.items.slice(0, 12).forEach(item => {
+          const img = document.createElement("img");
+          img.src = item.media.m;
+          img.alt = item.title;
+          img.loading = "lazy";
+          container.appendChild(img);
+        });
+      } catch (err) {
+        document.getElementById("flickr-feed").innerHTML = '<p class="error">Could not load photos 😔</p>';
+        console.error("Failed to load Flickr feed:", err);
+      }
+    }
+
+    loadFlickrFeed();
+  </script>
+</body>
+</html>
