@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>East Midlands Bus Users</title>
+  <title>East Midlands Bus Users – Flickr Gallery</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,37 +12,42 @@
     }
 
     header {
-      background-color: #d40000;
+      background: #d40000;
       color: white;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
     }
 
     main {
-      max-width: 1000px;
-      margin: 40px auto;
+      max-width: 1100px;
+      margin: 20px auto;
       padding: 20px;
-      background: white;
-      border-radius: 12px;
+      background: #fff;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     h2 {
-      text-align: center;
       color: #d40000;
-      margin-bottom: 20px;
+      text-align: center;
     }
 
-    .flickr-embed {
-      display: flex;
-      justify-content: center;
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
     }
 
-    .flickr-embed img {
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
-      max-width: 100%;
-      height: auto;
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
     }
   </style>
 </head>
@@ -50,20 +55,43 @@
 
   <header>
     <h1>East Midlands Bus Users</h1>
-    <p>Your source for bus updates, photos, and more</p>
+    <p>Live Flickr Photo Gallery</p>
   </header>
 
   <main>
-    <h2>📸 Full Photo Stream</h2>
-    <div class="flickr-embed">
-      <a data-flickr-embed="true" data-header="true" data-footer="true" data-context="true" 
-         href="https://www.flickr.com/photos/141186208@N08" title="">
-        <img src="https://live.staticflickr.com/65535/54621505809_a7a3845818_h.jpg" 
-             width="1600" height="1200" alt=""/>
-      </a>
-    </div>
+    <h2>📸 Latest Bus Photos</h2>
+    <div class="gallery" id="flickr-gallery"></div>
   </main>
 
-  <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+  <script>
+    const userId = '141186208@N08'; // Your Flickr ID
+    const apiKey = 'f2d48f9994c7a6f6d14fdab69d437b6f'; // Public demo API key
+    const gallery = document.getElementById('flickr-gallery');
+
+    fetch(`https://www.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=${apiKey}&user_id=${userId}&format=json&nojsoncallback=1&per_page=30`)
+      .then(res => res.json())
+      .then(data => {
+        data.photos.photo.forEach(photo => {
+          const imgSrc = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_z.jpg`;
+          const link = `https://www.flickr.com/photos/${userId}/${photo.id}`;
+
+          const img = document.createElement('img');
+          img.src = imgSrc;
+          img.alt = photo.title;
+
+          const a = document.createElement('a');
+          a.href = link;
+          a.target = '_blank';
+          a.appendChild(img);
+
+          gallery.appendChild(a);
+        });
+      })
+      .catch(err => {
+        gallery.innerHTML = '<p>Failed to load Flickr gallery.</p>';
+        console.error(err);
+      });
+  </script>
+
 </body>
 </html>
