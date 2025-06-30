@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: #f8f9fa;
       margin: 0;
       padding: 0;
     }
@@ -18,49 +18,48 @@
       text-align: center;
     }
 
-    #flickr-section {
+    main {
+      max-width: 900px;
+      margin: 40px auto;
       padding: 20px;
       background: white;
-      max-width: 1000px;
-      margin: 30px auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    #flickr-section h2 {
-      color: #d40000;
-      font-size: 1.5em;
-      margin-bottom: 10px;
+    h2 {
       text-align: center;
+      color: #d40000;
+      margin-bottom: 20px;
     }
 
-    .flickr-embed {
+    .flickr-container {
       display: flex;
       justify-content: center;
+      align-items: center;
     }
 
-    .flickr-embed img {
-      max-width: 100%;
-      height: auto;
+    .flickr-container a img {
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>East Midlands Bus Users</h1>
-    <p>Bringing together transport info and photos across the East Midlands</p>
+    <p>News, Photos, and Travel Updates for the Region</p>
   </header>
 
-  <section id="flickr-section">
-    <h2>📸 Recent Bus Photo</h2>
-    <div class="flickr-embed">
-      <a data-flickr-embed="true" data-header="true" data-footer="true" href="https://www.flickr.com/photos/matthewroebuck/54621505809/in/dateposted-public/" title="Stagecoach Yorkshire X17 (73081) (Matlock Bath)">
-        <img src="https://live.staticflickr.com/65535/54621505809_f137cd4049_5k.jpg" width="5120" height="3413" alt="Stagecoach Yorkshire X17 (73081) (Matlock Bath)"/>
+  <main>
+    <h2>📸 Featured Bus Photo</h2>
+    <div class="flickr-container">
+      <a data-flickr-embed="true" data-header="true" data-footer="true" data-context="true" href="https://www.flickr.com/photos/matthewroebuck/54621505809/in/dateposted-public/" title="Stagecoach Yorkshire X17 (73081) (Matlock Bath)">
+        <img src="https://live.staticflickr.com/65535/54621505809_9c1a3438cd_q.jpg" width="150" height="150" alt="Stagecoach Yorkshire X17 (73081) (Matlock Bath)"/>
       </a>
     </div>
-  </section>
+  </main>
 
   <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 </body>
